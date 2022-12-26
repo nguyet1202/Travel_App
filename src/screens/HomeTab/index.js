@@ -8,11 +8,13 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 // import Post from '../../components/Post/posts';
 import RecommendPost from '../../components/Post/RecommendPost';
 import Hotplaces from '../../components/Post/Hotplaces';
 // import { ScrollView } from 'react-native-gesture-handler';
-const HomeTab = () => {
+const HomeTab = ({item}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -57,7 +59,7 @@ const HomeTab = () => {
             <Text style={{color: '#FF7029', fontSize: 18, fontWeight: 'bold'}}>
               Địa điểm hot trong năm
             </Text>
-            <TouchableOpacity style={styles.seeallButton}>
+            <TouchableOpacity style={styles.seeallButton} onPress={() => navigation.navigate('Tất cả bài review hot', item)}>
               <Text
                 style={{
                   color: '#FF7029',

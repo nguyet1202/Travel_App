@@ -14,7 +14,7 @@ const CardItem = ({item}) => {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('DetailPage')}>
+      onPress={() => navigation.navigate('Chi Tiết', item)}>
       <Image style={styles.img} source={{uri: item.image}} />
       <TouchableOpacity style={styles.tilte}>
         <Text style={styles.tilteText}>{item?.tilte}</Text>
@@ -59,22 +59,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   img: {
-    // margin: 20,
     width: 170,
     height: 220,
     borderRadius: 20,
     opacity: 0.9,
-    // borderRadius: 100,
   },
   item: {
     position: 'relative',
-    // backgroundColor: 'white',
     width: 180,
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent:'center',
-    // alignItems:'center',
-    // height: 200,
     marginTop: 10,
   },
   tilte: {

@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,73 +9,81 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-// import Post from '../../components/Post/posts';
-// import RecommendPost from '../../components/Post/recommendPost';
-// import Hotplaces from '../../components/Post/hotplaces';
-// import { ScrollView } from 'react-native-gesture-handler';
+import {useRoute} from '@react-navigation/native';
 const DetailPage = () => {
-  const [data, setdata] = useState([]);
-  const [isloading, setisloading] = useState(true);
-  useEffect(() => {
-    getListHotPosts();
-    return () => {};
-  }, []);
-  getListHotPosts = () => {
-    const apiURL = 'https://6395736090ac47c6806b55bc.mockapi.io/Hots';
-    fetch(apiURL)
-      .then(res => res.json())
-      .then(resjson => {
-        setdata(resjson);
-      })
-      .catch(error => {
-        console.log('error: ', error);
-      })
-      .finally(() => setisloading(false));
-  };
+  const route = useRoute();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <ImageBackground
-          source={{
-            uri: 'https://cdnimg.vietnamplus.vn/uploaded/hotnnz/2022_05_12/5_bai_bien_hoang_so_dep_nhat4_1.jpg',
-          }}
+          source={{uri: route.params.image}}
           resizeMode="cover"
-          style={styles.BGimage}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 25,
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }}>
-            Travel App
-          </Text>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 25,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              paddingBottom: 35,
-            }}>
-            Cùng bạn trên những chuyến đi
-          </Text>
-        </ImageBackground>
+          style={styles.BGimage}></ImageBackground>
       </View>
-      <ScrollView vertical style={styles.mainContent}>
+      <View vertical style={styles.mainContent}>
         <View style={styles.topmain}>
-          <Text style={{color: '#FF7029', fontSize: 18, fontWeight: 'bold'}}>
-            {}
+          <Text
+            style={{
+              color: '#FF7029',
+              width: '100%',
+              fontSize: 25,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            {route.params.tilte}
           </Text>
+          <View style={styles.smallinformation}>
+            <Text
+              style={{
+                color: '#FF7029',
+                fontSize: 10,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                paddingRight: 5,
+              }}>
+              {route.params.Adress}
+            </Text>
+            <Text
+              style={{
+                color: '#FF7029',
+                fontSize: 10,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                paddingLeft: 5,
+                textDecorationLine: 'underline',
+              }}>
+              {route.params.createAt}
+            </Text>
+          </View>
         </View>
-      </ScrollView>
-    </View>
+        <View style={styles.contentReview}>
+          <View>
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 18,
+                fontWeight: 'bold',
+                // paddingLeft: 15,
+                paddingBottom:15,
+              }}>
+              Thông tin review
+            </Text>
+          </View>
+          <View style={styles.Viewcontent}>
+            <Text style={styles.content}>{route.params.Content}</Text>
+          </View>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 export default DetailPage;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     width: 395,
     height: 230,
@@ -85,45 +94,39 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   mainContent: {
-    position: 'absolute',
-    width: 405,
-    // height: 612,
-    left: -4,
-    top: 200,
+    width: 400,
     backgroundColor: '#FFFFFF',
-    borderRadius: 50,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
     elevation: 5,
   },
   topmain: {
+    backgroundColor: '#E6EEFA',
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     paddingLeft: 25,
     paddingRight: 35,
     paddingBottom: 15,
     paddingTop: 20,
   },
-  seeallButton: {
+  smallinformation: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: 'center',
   },
-  hotplaces: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 25,
-    paddingRight: 35,
-    paddingBottom: 15,
-    paddingTop: 0,
+  contentReview:{
+    width:'97%',
+    padding:20,
+    
   },
+  content:{
+    textAlign:'justify',
+    color:'#042940',
+    fontSize:16,
+    lineHeight:35,
+  }
 });

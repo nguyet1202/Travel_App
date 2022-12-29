@@ -1,5 +1,4 @@
 import {
-  FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -50,18 +49,10 @@ const CardItem = ({item}) => {
 export default CardItem;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '92%',
-    marginLeft: 15,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
   img: {
     width: 170,
     height: 220,
-    borderRadius: 20,
+    borderRadius: 15,
     opacity: 0.9,
   },
   item: {
@@ -83,7 +74,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   tilteText: {
-    // left:20,
     textAlign: 'center',
     color: '#044040',
     fontSize: 12,

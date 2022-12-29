@@ -1,11 +1,8 @@
-import {useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   ImageBackground,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React from 'react';

@@ -6,33 +6,24 @@ import {
   ActivityIndicator,
   View,
   Image,
-  ScrollView,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useContext} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import { PostContext } from '../../context/PostContext';
 
 const RecommendPost = () => {
-  const [data, setdata] = useState([]);
-  const [isloading, setisloading] = useState(true);
+  const {isloading,data,getListRecomPosts} = useContext(PostContext);
+  const navigation = useNavigation();
   useEffect(() => {
-    getListPosts();
+    getListRecomPosts();
     return () => {};
   }, []);
-  getListPosts = () => {
-    const apiURL = 'https://6395736090ac47c6806b55bc.mockapi.io/posts';
-    fetch(apiURL)
-      .then(res => res.json())
-      .then(resjson => {
-        setdata(resjson);
-      })
-      .catch(error => {
-        console.log('error: ', error);
-      })
-      .finally(() => setisloading(false));
-  };
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => navigation.navigate('Chi Tiết', item)}>
         <Image style={styles.img} source={{uri: item.image}} />
         <TouchableOpacity style={styles.tilte}>
           <Text style={styles.tilteText}>{item?.tilte}</Text>
@@ -81,42 +72,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   img: {
-    // margin: 20,
     width: 75,
     height: 75,
     borderRadius: 20,
-    opacity:0.9,
+    opacity: 0.9,
     borderRadius: 100,
   },
   item: {
     position: 'relative',
-    // backgroundColor: 'white',
     width: 90,
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent:'center',
-    // alignItems:'center',
     height: 120,
     marginTop: 0,
   },
   tilte: {
     position: 'absolute',
     top: 80,
-    // left: 10,
     textAlign: 'center',
     width: 80,
     height: 60,
-    // backgroundColor: 'rgba(255, 255, 255, 0.6)',
-    opacity:1.5,
+    opacity: 1.5,
     borderRadius: 7,
   },
   tilteText: {
-    // left:20,
     textAlign: 'center',
     color: '#044040',
     fontSize: 11,
     fontWeight: 'bold',
-    paddingTop:6,
+    paddingTop: 6,
   },
   emptyMessageStyle: {
     textAlign: 'center',
@@ -127,19 +111,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'pink',
   },
-  buttoninfor:{
+  buttoninfor: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft:5,
-    paddingRight:5
+    paddingLeft: 5,
+    paddingRight: 5,
   },
-  smallinfor:{
+  smallinfor: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop:10,
-    paddingLeft:3,
-    paddingRight:3,
-  }
+    paddingTop: 10,
+    paddingLeft: 3,
+    paddingRight: 3,
+  },
 });

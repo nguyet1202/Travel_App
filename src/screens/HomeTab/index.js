@@ -9,10 +9,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-// import Post from '../../components/Post/posts';
 import RecommendPost from '../../components/Post/RecommendPost';
 import Hotplaces from '../../components/Post/Hotplaces';
-// import { ScrollView } from 'react-native-gesture-handler';
 const HomeTab = ({item}) => {
   const navigation = useNavigation();
   return (

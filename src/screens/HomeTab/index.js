@@ -18,7 +18,7 @@ const HomeTab = ({item}) => {
       <View style={styles.header}>
         <ImageBackground
           source={{
-            uri: 'https://cdnimg.vietnamplus.vn/uploaded/hotnnz/2022_05_12/5_bai_bien_hoang_so_dep_nhat4_1.jpg',
+            uri: 'https://ik.imagekit.io/tvlk/blog/2023/02/dai-noi-hue-1.jpg?tr=dpr-2,w-675',
           }}
           resizeMode="cover"
           style={styles.BGimage}>
